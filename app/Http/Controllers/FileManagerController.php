@@ -28,7 +28,7 @@ class FileManagerController extends Controller
 
             foreach ($exp as $value1) {
                 if ($value1 != "") {
-                    array_push($array, $value1);
+                    $array += ['file' => $value1];
                 }
             }
 
@@ -37,9 +37,16 @@ class FileManagerController extends Controller
             $explode = explode('/', $mime);
 
             if ($explode[0] == 'image') {
-                $url = Storage::url($value);
+                $url = Storage::url($value1);
+            } else {
+                $url = Storage::url('nada.png');
             }
         }
+        $array += ['image' => $url];
+
+        //TODO: Chequear array asociativo entre fichero e imagen
+        print_r($array);
+
         return view('index', ['files' => $array, 'image' => $url]);
     }
 

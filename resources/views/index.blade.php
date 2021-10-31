@@ -34,14 +34,12 @@
         <table>
             <ul>
                 @foreach ($files ?? '' as $value)
-                <img src=" {{ asset($image) }}" alt="">
-                <li><a href="{{route('downloadfile', $value)}}" target="_blank"> {{ $value }} </a></li>
+                <img src=" {{ asset($files['image']) }}" alt="">
+                <li><a href="{{route('downloadfile', $files['file'])}}" target="_blank"> {{ $files['file']}} </a></li>
                 @endforeach
             </ul>
         </table>
     </form>
-
-
 </body>
 
 </html>
