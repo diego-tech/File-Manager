@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileManagerController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +16,5 @@ use App\Http\Controllers\FileManagerController;
 */
 
 Route::match(['GET', 'POST'], '/', [FileManagerController::class, 'FileManager'])->name('fileManager');
+
+Route::get('/file/{value}', [FileManagerController::class, 'Download'])->name('downloadfile');

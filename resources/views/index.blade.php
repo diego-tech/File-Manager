@@ -11,9 +11,9 @@
             text-align: center;
         }
 
-        image {
-            width: 100px;
-            height: 100px;
+        img {
+            width: 20px;
+            height: 20px;
         }
     </style>
 </head>
@@ -30,15 +30,17 @@
         <input type="submit" name="submit" value="Guardar Archivo">
     </form>
 
-    <table>
-        <ul>
-            @foreach ($files as $value)
-            <li>Value: {{ $value }}</li>
-            @endforeach
-        </ul>
-    </table>
+    <form method="POST" action="">
+        <table>
+            <ul>
+                @foreach ($files ?? '' as $value)
+                <img src=" {{ asset($image) }}" alt="">
+                <li><a href="{{route('downloadfile', $value)}}" target="_blank"> {{ $value }} </a></li>
+                @endforeach
+            </ul>
+        </table>
+    </form>
 
-    <img src="{{ asset($image)}}" alt="">
 
 </body>
 
