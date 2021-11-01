@@ -4,22 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 
 class FileManagerController extends Controller
 {
+    /**
+     * @param $request : Valor que saca del formulario introducido
+     * @return view : Vista, array con los datos, errores
+     */
     public function FileManager(Request $request)
     {
         $array = array();
         $arrayResult = array();
-
+        $errorStr = "";
+        $fileName = "";
         if ($request->has('file') && $request->isMethod('post')) {
             $fileName = $request->input('fileName');
 
-            $request->file('file')->storeAs(
-                'public',
-                $fileName
-            );
+            if ($fileName != "") {
+                $request->file('file')->storeAs(
+                    'public',
+                    $fileName
+                );
+            } else {
+                $errorStr = "De un nombre al archivo";
+            }
         }
 
         $files = Storage::files('/public');
@@ -29,8 +37,6 @@ class FileManagerController extends Controller
             $exp = explode('public/', $value);
 
             foreach ($exp as $value1) {
-                if ($value1 != "") {
-                }
             }
 
             $mime = Storage::mimeType($value);
@@ -39,7 +45,7 @@ class FileManagerController extends Controller
             if ($explode[0] == 'image') {
                 $url = Storage::url($value);
             } else {
-                $url = Storage::url('imgassets/file.png');
+                $url = null;
             }
 
             $array = [
@@ -50,9 +56,13 @@ class FileManagerController extends Controller
             array_push($arrayResult, $array);
         }
 
-        return view('index', ['files' => $arrayResult]);
+        return view('index', ['files' => $arrayResult, 'errorStr' => $errorStr]);
     }
 
+    /**
+     * @param valor
+     * @return descarga
+     */
     public function Download($value)
     {
         $url = Storage::url($value);

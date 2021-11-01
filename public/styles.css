@@ -1,0 +1,80 @@
+body {
+    background-color: #1c2127;
+}
+
+h1 {
+    color: wheat;
+    text-align: center;
+    margin-top: 2%;
+}
+
+img {
+    width: 7%;
+    height: 7%;
+}
+
+#file {
+    margin: 2%;
+    color: white;
+}
+
+#file {
+    border: none;
+    margin: 2%;
+}
+
+#file:hover {
+    cursor: pointer;
+}
+
+#filenameinput {
+    margin: 2%;
+}
+
+#submit {
+    border: none;
+    width: 50%;
+    border-radius: 5px;
+    margin: 2%;
+}
+
+#submit:hover {
+    cursor: pointer;
+}
+
+.list-group-item {
+    margin: 2%;
+}
+
+#forms {
+    float: left;
+}
+
+#filename {
+    padding-left: 5%;
+}
+
+.container {
+    margin-top: 3%;
+    width: 40%;
+}
+
+#errors {
+    margin: auto;
+    margin-top: 50px;
+    width: 30%;
+    height: 60px;
+    border-radius: 10px;
+    border: 3px solid red;
+    color: white;
+}
+
+#errors h4 {
+    text-align: center;
+    padding: 10px;
+}
+
+#files {
+    height: 500px;
+    overflow: scroll;
+}
