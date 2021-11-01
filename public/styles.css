@@ -60,6 +60,7 @@ img {
 }
 
 #errors {
+    clear: both;
     margin: auto;
     margin-top: 50px;
     width: 30%;
@@ -75,6 +76,7 @@ img {
 }
 
 #files {
+    display: block;
     height: 500px;
     overflow: scroll;
 }
