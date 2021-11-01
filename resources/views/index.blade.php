@@ -33,9 +33,11 @@
     <form method="POST" action="">
         <table>
             <ul>
-                @foreach ($files ?? '' as $value)
-                <img src=" {{ asset($files['image']) }}" alt="">
-                <li><a href="{{route('downloadfile', $files['file'])}}" target="_blank"> {{ $files['file']}} </a></li>
+                @foreach($files as $key => $values)
+                <img src="{{ asset($values['image']) }}" alt="">
+                <li>
+                    <a href="{{route('downloadfile', $values['filename'])}}" target="_blank"> {{ $values['filename'] }} </a>
+                </li>
                 @endforeach
             </ul>
         </table>

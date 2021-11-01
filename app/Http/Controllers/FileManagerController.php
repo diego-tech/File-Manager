@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 
 class FileManagerController extends Controller
 {
     public function FileManager(Request $request)
     {
-        //TODO: Realizar array asociativo con  los ficheros para poder mostrar en conjunto la miniatura, el enlace de descarga y el nombre del fichero
         $array = array();
+        $arrayResult = array();
 
         if ($request->has('file') && $request->isMethod('post')) {
             $fileName = $request->input('fileName');
@@ -21,33 +22,35 @@ class FileManagerController extends Controller
             );
         }
 
-        $files = Storage::allFiles('/public');
+        $files = Storage::files('/public');
 
         foreach ($files as $value) {
+
             $exp = explode('public/', $value);
 
             foreach ($exp as $value1) {
                 if ($value1 != "") {
-                    $array += ['file' => $value1];
                 }
             }
 
             $mime = Storage::mimeType($value);
-
             $explode = explode('/', $mime);
 
             if ($explode[0] == 'image') {
-                $url = Storage::url($value1);
+                $url = Storage::url($value);
             } else {
-                $url = Storage::url('nada.png');
+                $url = Storage::url('imgassets/file.png');
             }
+
+            $array = [
+                'filename' => $value1,
+                'image' => $url
+            ];
+
+            array_push($arrayResult, $array);
         }
-        $array += ['image' => $url];
 
-        //TODO: Chequear array asociativo entre fichero e imagen
-        print_r($array);
-
-        return view('index', ['files' => $array, 'image' => $url]);
+        return view('index', ['files' => $arrayResult]);
     }
 
     public function Download($value)
