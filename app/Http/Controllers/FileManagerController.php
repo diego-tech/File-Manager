@@ -36,9 +36,6 @@ class FileManagerController extends Controller
 
             $exp = explode('public/', $value);
 
-            foreach ($exp as $value1) {
-            }
-
             $mime = Storage::mimeType($value);
             $explode = explode('/', $mime);
 
@@ -49,7 +46,7 @@ class FileManagerController extends Controller
             }
 
             $array = [
-                'filename' => $value1,
+                'filename' => $exp[1],
                 'image' => $url
             ];
 
